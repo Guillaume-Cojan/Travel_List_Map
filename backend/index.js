@@ -1,23 +1,72 @@
 const express = require("express");
+//const cookieParser = require("cookie-parser");
+//const jwt = require("jsonwebtoken");
 const app = express();
-const cors = require("cors");
-const pool = require("./config");
+const port = process.env.PORT || 8000;
 
-const port = process.env.PORT || 5000;
+const connection = require("./config");
+//const bcrypt = require("bcrypt");
 
-const usersRoute = require("./routes/users-route.js");
-const placesRoute = require("./routes/places-route.js");
-const addUserRoute = require("./routes/users-route.js");
-const addPlaceRoute = require("./routes/places-route.js");
-
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+//app.use(cookieParser());
 
-app.use("/users", usersRoute, addUserRoute);
-app.use("/places", placesRoute, addPlaceRoute);
+const placesRouter = require("./routes/places-route");
+const usersRouter = require("./routes/users-route");
+//const { getAllUsers } = require("./controller/users-controller");
 
-app.listen(port, (err) => {
-    if (err) throw new Error("Server is not working! :(");
-    console.log(`Server running on port ${port} 🚀`);
+app.use("/places", placesRouter);
+app.use("/users", usersRouter);
+
+/*app.post("/login", (req, res, next) => {
+    const { username, email, password } = req.body;
+    connection.query(
+        "SELECT * FROM user WHERE username = ?",
+        [username],
+        async (err, results) => {
+            if (err) {
+                res.status(500).send(`Error retrieving user: ${err}`);
+            } else {
+                const isPasswordEqual = await bcrypt.compare(
+                    password,
+                    results[0].password
+                );
+                if (isPasswordEqual && username === results[0].username) {
+                    const token = jwt.sign(
+                        { id: results[0].id },
+                        "your-secret-key"
+                    );
+
+                    res.status(200)
+                        .cookie("token", token, {
+                            httpOnly: true,
+                        })
+                        .json({ id: results[0].id });
+                } else {
+                    res.status(401).send("Wrong credentials");
+                }
+            }
+        }
+    );
 });
+
+const authentication = (req, res, next) => {
+    if (!req.cookies.token) {
+        res.send("something went wrong :(");
+    } else {
+        jwt.verify(req.cookies.token, "your-secret-key", (err, decoded) => {
+            if (err) {
+                res.send("wrong access");
+            }
+            req.userId = decoded.id;
+            next();
+        });
+    }
+};
+
+app.get("/secret", authentication, (req, res, next) => {
+    res.send("Welcome to the secret route");
+});
+
+app.get("/users", authentication, getAllUsers);*/
+
+app.listen(port, () => console.log(`server running on port ${port}`));

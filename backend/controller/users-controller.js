@@ -1,15 +1,29 @@
-const Users = require("../model/users");
+/*const bcrypt = require("bcrypt");
+const User = require("../model/User");
 
-const addUser = (req, res) => {
-    Users.addNewUser(req.body.email, (err, result) => {
-        if (err) {
-            res.status(500).send("Error adding user :(");
-        } else {
-            const id = result.insertId;
-            req.id = id;
-            res.send("user added");
-        }
-    });
+const createUser = async (req, res) => {
+  const { username, email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const handleResponseController = (err, result) => {
+    if (err) {
+      res.status(500).send(`Error inserting user: ${err}`);
+    } else {
+      res.send("User created :)");
+    }
+  };
+
+  User.addUser(username, email, hashedPassword, handleResponseController);
 };
 
-module.exports = { addUser };
+const getAllUsers = (req, res, next) => {
+  User.getAll((err, results) => {
+    if (err) {
+      res.send("error retrieving users");
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+module.exports = { createUser, getAllUsers };*/
