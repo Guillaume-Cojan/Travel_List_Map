@@ -1,29 +1,60 @@
-/*const bcrypt = require("bcrypt");
 const User = require("../model/User");
 
-const createUser = async (req, res) => {
-  const { username, email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const handleResponseController = (err, result) => {
-    if (err) {
-      res.status(500).send(`Error inserting user: ${err}`);
-    } else {
-      res.send("User created :)");
-    }
-  };
-
-  User.addUser(username, email, hashedPassword, handleResponseController);
+const getAll = (req, res, next) => {
+    User.getAllUsers((err, result) => {
+        if (err) {
+            res.status(500).send("error retrieving users from DB");
+        } else {
+            res.send(result);
+        }
+    });
 };
 
-const getAllUsers = (req, res, next) => {
-  User.getAll((err, results) => {
-    if (err) {
-      res.send("error retrieving users");
+const getById = (req, res, next) => {
+    if (req.params.id) {
+        User.getUserById(req.params.id, (err, result) => {
+            if (err) {
+                res.status(500).send("error retrieving user from DB");
+            } else {
+                res.send(result);
+            }
+        });
     } else {
-      res.json(results);
+        User.getUserById(req.id, (err, result) => {
+            if (err) {
+                res.status(500).send("error retrieving user from DB");
+            } else {
+                res.send(result);
+            }
+        });
     }
-  });
 };
 
-module.exports = { createUser, getAllUsers };*/
+const addUser = (req, res, next) => {
+    User.addNewUser(
+        req.body.username,
+        req.body.email,
+        req.body.password,
+        (err, result) => {
+            if (err) {
+                res.status(500).send("Error adding user :(");
+            } else {
+                const id = result.insertId;
+                req.id = id;
+                next();
+            }
+        }
+    );
+};
+
+const deleteUser = (req, res, next) => {
+    User.deleteUserById(req.params.id, (err, result) => {
+        if (err) {
+            res.status(500).send("error deleting user");
+        } else {
+            res.send(result);
+        }
+    });
+};
+
+module.exports = { getAll, getById, addUser, deleteUser };

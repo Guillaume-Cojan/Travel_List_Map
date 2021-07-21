@@ -1,21 +1,39 @@
-/*const connection = require("../config");
+const connection = require("../config");
 
 const User = {};
 
-User.addUser = (username, email, hashedPassword, handleResponse) => {
-  connection.query(
-    "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-    [username, email, hashedPassword],
-    (err, results) => {
-      handleResponse(err, results);
-    }
-  );
+User.getAllUsers = (callback) => {
+    connection.query("SELECT * FROM users", (err, result) => {
+        callback(err, result);
+    });
 };
 
-User.getAll = (handleResponse) => {
-  connection.query("SELECT * FROM users", (err, results) => {
-    handleResponse(err, results);
-  });
+User.getUserById = (id, callback) => {
+    connection.query("SELECT * FROM users WHERE id=?", [id], (err, result) => {
+        callback(err, result);
+    });
 };
 
-module.exports = User;*/
+User.addNewUser = (
+    username,
+    email,
+    password,
+    callback
+) => {
+    connection.query(
+        "INSERT INTO users(username, email, password) VALUES (?, ?, ?)",
+        [username, email, password],
+        (err, result) => {
+            callback(err, result);
+        }
+    );
+};
+
+User.deleteUserById = (id, callback) => {
+    connection.query("DELETE FROM users WHERE id=?", [id], (err, result) => {
+        callback(err, result);
+    });
+};
+
+module.exports = User;
+
