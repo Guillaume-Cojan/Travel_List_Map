@@ -5,7 +5,7 @@ import Star from "../assets/ratingstar.png";
 
 function Map() {
     const [viewport, setViewport] = useState({
-        width: "90vw",
+        width: "95vw",
         height: "70vh",
         latitude: 48,
         longitude: 20,
@@ -36,7 +36,7 @@ function Map() {
                     latitude={48.0}
                     longitude={20.0}
                     closeButton={true}
-                    closeOnClick={false}
+                    closeOnClick={true}
                     anchor="left"
                 >
                     <div className="place-card">

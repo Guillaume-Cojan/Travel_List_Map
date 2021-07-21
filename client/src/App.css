@@ -1,3 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}
+
+.navbar-links {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}
+
+.menu-item {
+    margin: 2% 5%;
+}
+
+.header-container {
+    height: 20vh;
+    background-color: rgb(235, 184, 117);
+    margin-bottom: 2vh;
+    display: flex;
+    align-items: center;
+    padding-left: 5vw;
+}
 .place-card {
     width: 250px;
     height: 250px;
@@ -17,4 +50,13 @@ label {
     font-size: 15px;
     font-weight: 600;
     border-bottom: 1px solid rgb(19, 19, 126);
+}
+
+.footer-container {
+    height: 20vh;
+    background-color: rgb(235, 184, 117);
+    margin-top: 2vh;
+    display: flex;
+    align-items: center;
+    padding-left: 5vw;
 }
