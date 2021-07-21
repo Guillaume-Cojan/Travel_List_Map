@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const bcrypt = require("bcrypt");
 
 const getAll = (req, res, next) => {
     User.getAllUsers((err, result) => {
@@ -11,41 +12,37 @@ const getAll = (req, res, next) => {
 };
 
 const getById = (req, res, next) => {
-    if (req.params.id) {
-        User.getUserById(req.params.id, (err, result) => {
-            if (err) {
-                res.status(500).send("error retrieving user from DB");
-            } else {
-                res.send(result);
-            }
-        });
-    } else {
-        User.getUserById(req.id, (err, result) => {
-            if (err) {
-                res.status(500).send("error retrieving user from DB");
-            } else {
-                res.send(result);
-            }
-        });
-    }
+    User.getUserById(req.params.id, (err, result) => {
+        if (err) {
+            res.status(500).send("error retrieving user from DB");
+        } else {
+            res.send(result);
+        }
+    });
 };
 
-const addUser = (req, res, next) => {
+//REGISTER
+const addUser = async (req, res, next) => {
+    const {username, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const handleResponseController = (err, result) => {
+      if (err) {
+        res.status(500).send("Error creating user");
+      } else {
+        res.send("User successfuly created");
+      }
+    }
+    
     User.addNewUser(
-        req.body.username,
-        req.body.email,
-        req.body.password,
-        (err, result) => {
-            if (err) {
-                res.status(500).send("Error adding user :(");
-            } else {
-                const id = result.insertId;
-                req.id = id;
-                next();
-            }
-        }
-    );
+        username,
+        email,
+        hashedPassword,
+        handleResponseController);
 };
+
+
+
 
 const deleteUser = (req, res, next) => {
     User.deleteUserById(req.params.id, (err, result) => {

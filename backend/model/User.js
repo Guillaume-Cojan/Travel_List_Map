@@ -17,12 +17,12 @@ User.getUserById = (id, callback) => {
 User.addNewUser = (
     username,
     email,
-    password,
+    hashedpassword,
     callback
 ) => {
     connection.query(
         "INSERT INTO users(username, email, password) VALUES (?, ?, ?)",
-        [username, email, password],
+        [username, email, hashedpassword],
         (err, result) => {
             callback(err, result);
         }

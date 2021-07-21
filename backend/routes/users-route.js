@@ -9,7 +9,10 @@ const {
 
 router.get("/list", getAll);
 router.get("/:id", getById);
-router.post("/", addUser, getById);
+
+//REGISTER
+router.post("/register", addUser);
+
 router.delete("/:id", deleteUser);
 
 module.exports = router;
