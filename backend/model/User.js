@@ -14,12 +14,8 @@ User.getUserById = (id, callback) => {
     });
 };
 
-User.addNewUser = (
-    username,
-    email,
-    hashedpassword,
-    callback
-) => {
+//REGISTER
+User.addNewUser = (username, email, hashedpassword, callback) => {
     connection.query(
         "INSERT INTO users(username, email, password) VALUES (?, ?, ?)",
         [username, email, hashedpassword],
@@ -29,6 +25,20 @@ User.addNewUser = (
     );
 };
 
+//LOGIN
+/*User.loginUser = (
+  username,
+  callback
+) => {
+  connection.query(
+      "SELECT * FROM users WHERE username = ?",
+      [username], 
+      (err, result) => {
+          callback(err, result);
+      }
+  );
+};*/
+
 User.deleteUserById = (id, callback) => {
     connection.query("DELETE FROM users WHERE id=?", [id], (err, result) => {
         callback(err, result);
@@ -36,4 +46,3 @@ User.deleteUserById = (id, callback) => {
 };
 
 module.exports = User;
-

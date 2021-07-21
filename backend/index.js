@@ -1,6 +1,6 @@
 const express = require("express");
-//const cookieParser = require("cookie-parser");
-//const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -8,7 +8,7 @@ const connection = require("./config");
 //const bcrypt = require("bcrypt");
 
 app.use(express.json());
-//app.use(cookieParser());
+app.use(cookieParser());
 
 const placesRouter = require("./routes/places-route");
 const usersRouter = require("./routes/users-route");
@@ -47,7 +47,7 @@ app.use("/users", usersRouter);
             }
         }
     );
-});
+});*/
 
 const authentication = (req, res, next) => {
     if (!req.cookies.token) {
@@ -57,13 +57,13 @@ const authentication = (req, res, next) => {
             if (err) {
                 res.send("wrong access");
             }
-            req.userId = decoded.id;
+            req.id = decoded.id;
             next();
         });
     }
 };
 
-app.get("/secret", authentication, (req, res, next) => {
+/*app.get("/secret", authentication, (req, res, next) => {
     res.send("Welcome to the secret route");
 });
 
