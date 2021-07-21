@@ -21,11 +21,22 @@ Place.addNewPlace = (
     rating,
     creator,
     creation_date,
+    latitude,
+    longitude,
     callback
 ) => {
     connection.query(
-        "INSERT INTO places(name, description, picture_url, rating, creator, creation_date) VALUES (?, ?, ?, ?, ?, ?)",
-        [name, description, picture_url, rating, creator, creation_date],
+        "INSERT INTO places(name, description, picture_url, rating, creator, creation_date, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+            name,
+            description,
+            picture_url,
+            rating,
+            creator,
+            creation_date,
+            latitude,
+            longitude,
+        ],
         (err, result) => {
             callback(err, result);
         }

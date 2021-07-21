@@ -38,6 +38,8 @@ const addPlace = (req, res, next) => {
         req.body.rating,
         req.body.creator,
         req.body.creation_date,
+        req.body.latitude,
+        req.body.longitude,
         (err, result) => {
             if (err) {
                 res.status(500).send("Error adding place :(");
