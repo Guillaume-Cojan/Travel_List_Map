@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function App() {
     const [currentUser, setCurrentUser] = useState(null);
+
     return (
         <div className="App">
             <Navbar currentUser={currentUser} />

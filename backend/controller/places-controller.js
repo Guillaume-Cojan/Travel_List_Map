@@ -42,7 +42,8 @@ const addPlace = (req, res, next) => {
         req.body.longitude,
         (err, result) => {
             if (err) {
-                res.status(500).send("Error adding place :(");
+                res.status(500).send(`Error adding place ${err}:(`);
+                console.log(err);
             } else {
                 const id = result.insertId;
                 req.id = id;
