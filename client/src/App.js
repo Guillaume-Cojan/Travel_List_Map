@@ -7,10 +7,15 @@ import { useState } from "react";
 
 function App() {
     const [currentUser, setCurrentUser] = useState(null);
+    const myStorage = window.localStorage;
 
     return (
         <div className="App">
-            <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <Navbar
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                myStorage={myStorage}
+            />
             <Header />
             <Map currentUser={currentUser} />
             <Footer />

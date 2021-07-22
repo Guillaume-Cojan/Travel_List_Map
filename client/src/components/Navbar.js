@@ -3,22 +3,9 @@ import Register from "./Register";
 import Login from "./Login";
 import { useState } from "react";
 
-function NavBar({ currentUser, setCurrentUser }) {
+function NavBar({ currentUser, setCurrentUser, myStorage }) {
     const [showRegister, setShowRegister] = useState(false);
-    const [closeRegister, setCloseRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-    const [closeLogin, setCloseLogin] = useState(false);
-    const myStorage = window.localStorage;
-
-    function handleRegister() {
-        setShowRegister(!showRegister);
-        setCloseRegister(!showRegister);
-    }
-
-    function handleLogin() {
-        setShowLogin(!showLogin);
-        setCloseLogin(!showLogin);
-    }
 
     return (
         <div className="navbar">
@@ -35,39 +22,32 @@ function NavBar({ currentUser, setCurrentUser }) {
                         <button className="menu-item">Home</button>
                         <button
                             className="menu-item"
-                            onClick={() => handleRegister()}
+                            onClick={() => setShowRegister(true)}
                         >
                             Register
                         </button>
                         <button
                             className="menu-item"
-                            onClick={() => handleLogin()}
+                            onClick={() => setShowLogin(true)}
                         >
                             Login
                         </button>
                     </div>
                 )}
             </div>
-            {showRegister === true && <Register showRegister={showRegister} />}
-            {closeRegister === true && (
-                <span
-                    className="registerCancel"
-                    onClick={() => handleRegister()}
-                >
-                    Close
-                </span>
+            {showRegister === true && (
+                <Register
+                    showRegister={showRegister}
+                    setShowRegister={setShowRegister}
+                />
             )}
             {showLogin === true && (
                 <Login
                     showLogin={showLogin}
+                    setShowLogin={setShowLogin}
                     myStorage={myStorage}
                     setCurrentUser={setCurrentUser}
                 />
-            )}
-            {closeLogin === true && (
-                <span className="registerCancel" onClick={() => handleLogin()}>
-                    Close
-                </span>
             )}
         </div>
     );

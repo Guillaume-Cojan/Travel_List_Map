@@ -170,9 +170,10 @@ label {
     cursor: pointer;
 }
 
-.registerCancel {
+.registerCancel,
+.loginCancel {
     position: absolute;
-    top: 7%;
-    left: 56%;
+    top: 3%;
+    left: 85%;
     cursor: pointer;
 }

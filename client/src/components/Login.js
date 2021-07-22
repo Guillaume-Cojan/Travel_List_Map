@@ -39,6 +39,12 @@ function Login({ setShowLogin, setCurrentUser, myStorage }) {
                     <span className="failure">Something went wrong!</span>
                 )}
             </form>
+            <span
+                className="loginCancel"
+                onClick={() => setShowLogin(false)}
+            >
+                Close
+            </span>
         </div>
     );
 }
