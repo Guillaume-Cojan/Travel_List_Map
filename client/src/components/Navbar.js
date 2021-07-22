@@ -3,11 +3,12 @@ import Register from "./Register";
 import Login from "./Login";
 import { useState } from "react";
 
-function NavBar({ currentUser }) {
+function NavBar({ currentUser, setCurrentUser }) {
     const [showRegister, setShowRegister] = useState(false);
     const [closeRegister, setCloseRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [closeLogin, setCloseLogin] = useState(false);
+    const myStorage = window.localStorage;
 
     function handleRegister() {
         setShowRegister(!showRegister);
@@ -56,7 +57,13 @@ function NavBar({ currentUser }) {
                     Close
                 </span>
             )}
-            {showLogin === true && <Login showLogin={showLogin} />}
+            {showLogin === true && (
+                <Login
+                    showLogin={showLogin}
+                    myStorage={myStorage}
+                    setCurrentUser={setCurrentUser}
+                />
+            )}
             {closeLogin === true && (
                 <span className="registerCancel" onClick={() => handleLogin()}>
                     Close

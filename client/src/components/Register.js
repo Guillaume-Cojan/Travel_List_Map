@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 
-function Register({ showRegister, handleRegister }) {
+function Register() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const usernameRef = useRef();

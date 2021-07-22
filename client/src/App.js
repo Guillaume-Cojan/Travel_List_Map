@@ -10,7 +10,7 @@ function App() {
 
     return (
         <div className="App">
-            <Navbar currentUser={currentUser} />
+            <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
             <Header />
             <Map currentUser={currentUser} />
             <Footer />
