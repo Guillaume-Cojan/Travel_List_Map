@@ -1,7 +1,9 @@
+import Logo from "../assets/logo.png";
+
 function NavBar() {
     return (
         <div className="navbar">
-            <div className="logo">Logo</div>
+            <img src={Logo} alt="logo" className="logo" />
             <div className="navbar-links">
                 <p className="menu-item">Home</p>
                 <p className="menu-item">My Places</p>

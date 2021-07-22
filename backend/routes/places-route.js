@@ -7,7 +7,7 @@ const {
     deletePlace,
 } = require("../controller/places-controller");
 
-router.get("/list", getAll);
+router.get("/", getAll);
 router.get("/:id", getById);
 router.post("/", addPlace, getById);
 router.delete("/:id", deletePlace);

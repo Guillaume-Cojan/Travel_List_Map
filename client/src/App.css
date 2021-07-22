@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
+    background-color: black;
 }
 .navbar {
     display: flex;
@@ -11,12 +12,16 @@ body {
     color: black;
 }
 
+.logo {
+    width: 156px;
+    margin: 0.5%;
+}
 .navbar-links {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .menu-item {
@@ -24,8 +29,11 @@ body {
 }
 
 .header-container {
-    height: 20vh;
-    background-color: rgb(235, 184, 117);
+    height: 30vh;
+    background-image: url(./assets/landscape.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
     margin-bottom: 2vh;
     display: flex;
     align-items: center;
